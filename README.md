@@ -36,32 +36,11 @@ $ npm install
 $ npm start
 ```
 
-### Electron 20 major update
-
-Since Electron 20 update, [@electron/remote](https://github.com/electron/remote) is replaced by [ipcRenderer](https://www.electronjs.org/docs/latest/api/ipc-renderer) and [contextBridge](https://www.electronjs.org/fr/docs/latest/api/context-bridge), due to @electron/remote [many subtle pitfalls](https://nornagon.medium.com/electrons-remote-module-considered-harmful-70d69500f31).
-
-### Electron 12+ major update
-
-- Since [remote](https://www.electronjs.org/docs/api/remote) module is deprecated since Electron 12, this boilerplate uses [@electron/remote](https://github.com/electron/remote).
-- This boilerplate doesn't use `nodeIntegration` nor `nodeIntegrationInWorker` option in `BrowserWindow` anymore [as required for security reasons](https://www.electronjs.org/docs/tutorial/security#2-do-not-enable-nodejs-integration-for-remote-content) but uses a preload script instead. This is useful for the app print function. If you want to see print function using `nodeIntegration` option, [check this printing sample app](https://github.com/hokein/electron-sample-apps/tree/master/printing).
-
 ## Configuration
 
 You just need to change the `src` attribute of the `webview` in `index.html` file to display the url you want in your webview.
 
 Alternatively, it's also possible to just load an external URL:
-
-```js
-// Comment
-//mainWindow.loadURL(`file://${__dirname}/index.html`); // Load custom html file with external content using webview tag
-
-// Uncomment
-mainWindow.loadURL("https://github.com"); // Load directly an URL if you don't need interface customization
-
-// Or uncomment if you prefer to use BrowserView:
-const view = require("./src/view");
-view.createBrowserView(mainWindow);
-```
 
 ### Developer tools
 
@@ -93,77 +72,6 @@ If you want to change the window dimensions at the first start, change `width` a
 This webview integrates an Electron menu. It will also make standard keyboard shortcuts, like copy and paste, work on MacOS.
 
 You can modify this menu in `src/menu.js` file.
-
-### Topbar (home and print buttons)
-
-A topbar to show buttons:
-
-- "Home" button to come back to your app if your website has external links.
-- "Print" button to print the current url displayed by the webview.
-
-You can activate/deactivate this topbar (activate by default).
-
-#### Deactivation
-
-##### In `src/main.js`:
-
-```js
-// Comment:
-// require("./src/print");
-```
-
-##### In `src/window.js`:
-
-```js
-// Comment:
-// preload: path.join(__dirname, "../preload.js"), // required for print function
-```
-
-##### In `index.html`:
-
-```html
-<!-- Comment -->
-<!-- <link rel="stylesheet" href="assets/css/topbar.css" /> -->
-<!-- <div id="controls">...</div> -->
-<!-- <script src="assets/js/renderer.js"></script> -->
-
-<!-- Uncomment -->
-<link rel="stylesheet" href="assets/css/no-topbar.css" />
-```
-
-##### In `assets/js/renderer.js`:
-
-```js
-// Comment:
-
-// Home button exists
-/*
-if (document.querySelector("#home")) {
-  ...
-}
-*/
-
-// Print button exits
-/*
-if (document.querySelector("#print_button")) {
-  ...
-}
-*/
-```
-
-#### Activation
-
-- Do the opposite of what you did in the activation chapter above.
-- Don't forget to set the homepage of your app in the `data-home` attribute of `webview` in `index.html` file to make the "Home" button works.
-
-```html
-<!-- Webview -->
-<webview
-  autosize="on"
-  src="https://www.github.com"
-  data-home="https://github.com"
-></webview>
-```
 
 ## Application
 
@@ -212,7 +120,7 @@ $ npx electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets
 Windows
 
 ```bash
-$ npx electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName="Electron Webview"
+$ npx electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName="DeskGPT"
 ```
 
 Linux (Ubuntu)
@@ -254,10 +162,10 @@ $ npm install electron-installer-dmg --save-dev
 ### Create the DMG
 
 ```bash
-$ npx electron-installer-dmg ./release-builds/Electron\ webview-darwin-x64/Electron\ webview.app electron-webview --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns
+$ npx electron-installer-dmg ./release-builds/DeskGPT-darwin-x64/DeskGPT.app DeskGPT --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns
 ```
 
-An `electron-webview.dmg` file is now created in the `release-builds` folder.
+An `DeskGPT.dmg` file is now created in the `release-builds` folder.
 
 ### Shortcuts
 

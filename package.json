@@ -5,24 +5,29 @@
   "description": "A simple ChatGPT desktop version",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "package-mac": "npx electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
-    "package-win": "npx electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"ChatGPT\"",
-    "package-linux": "npx electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
-    "create-installer-mac": "npx electron-installer-dmg ./release-builds/Electron\\ webview-darwin-x64/Electron\\ webview.app electron-webview --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
-  "repository": "https://github.com/LuisMiguelMP/deskgpt",
-  "keywords": [
-    "chatgpt",
-    "desktop",
-    "Electron",
-    "webview"
-
-  ],
-  "author": "Luís Miguel Massih Pereira",
+  "keywords": [],
+  "author": {
+    "name": "Luís Miguel Massih Pereira",
+    "email": "lmmp1337@gmail.com"
+  },
   "license": "MIT",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  },
   "devDependencies": {
-    "electron": "^23.0.0",
-    "electron-installer-dmg": "^4.0.0"
+    "@electron-forge/cli": "^6.0.5",
+    "@electron-forge/maker-deb": "^6.0.5",
+    "@electron-forge/maker-dmg": "^6.0.5",
+    "@electron-forge/maker-rpm": "^6.0.5",
+    "@electron-forge/maker-squirrel": "^6.0.5",
+    "@electron-forge/maker-wix": "^6.0.5",
+    "@electron-forge/maker-zip": "^6.0.5",
+    "electron": "23.1.3"
   }
 }
