@@ -2,7 +2,7 @@
 
 > Uses [Electron 23](https://releases.electronjs.org/release/v23.0.0)
 
-A simple ChatGPT Electron Webview.
+A simple ChatGPT Electron webview application.
 
 Features:
 
