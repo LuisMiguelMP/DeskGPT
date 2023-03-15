@@ -85,7 +85,7 @@ For this we need a 1024x1024 png-icon, a .icns for macs and a .ico for windows. 
 
 - Go to [iConvert Icons](https://iconverticons.com/online/) and upload the PNG and the service will take care of creating the other icon-formats.
 
-- Add your files in `assets/icons`: put the `.icns` file into the `mac` folder, the pngs in the png folder and the `.ico` file in the win folder.<br>Rename the `.icns` and `.ico` files in `icon`.
+- Add your files in `assets/icons`.
 
 #### Mac
 
@@ -95,95 +95,17 @@ I recommend using [Image2icon](http://www.img2icnsapp.com), an awesome free app 
 
 The `.icns` icon converted with Image2icon perfectly works on Mac.
 
-### Electron packager
-
-"[Electron Packager](https://github.com/electron-userland/electron-packager) is a command line tool and Node.js library that bundles Electron-based application source code with a renamed Electron executable and supporting files into folders ready for distribution."
-
-#### Install Electron packager
-
-```bash
-$ npm install electron-packager --save-dev
-```
-
 #### Application name
 
 Change the `productName` in `package.json`
 
 #### Build MacOS, Windows and Linux package from the terminal
 
-MacOS
-
 ```bash
-$ npx electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds
+$ npm run make
 ```
 
-Windows
-
-```bash
-$ npx electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName="DeskGPT"
-```
-
-Linux (Ubuntu)
-
-```bash
-$ npx electron-packager . --overwrite --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds
-```
-
-#### Shortcuts
-
-To make it easier to create new builds, scripts are added in `package.json`.
-
-Now you can run:
-
-```bash
-$ npm run package-mac
-```
-
-```bash
-$ npm run package-win
-```
-
-```bash
-$ npm run package-linux
-```
-
-## Mac installer
-
-To create a DMG installer for our Electron app we can use the [electron-installer-dmg](https://github.com/mongodb-js/electron-installer-dmg) package.
-
-To create a DMG installer you first need to package the app as we saw in the Application chapter above.
-
-### Install
-
-```bash
-$ npm install electron-installer-dmg --save-dev
-```
-
-### Create the DMG
-
-```bash
-$ npx electron-installer-dmg ./release-builds/DeskGPT-darwin-x64/DeskGPT.app DeskGPT --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns
-```
-
-An `DeskGPT.dmg` file is now created in the `release-builds` folder.
-
-### Shortcuts
-
-To make it easier to create new DMG installer, a script is added in `package.json`.
-
-Now you can run:
-
-```bash
-$ npm run create-installer-mac
-```
-
-## Source
-
-Based on:
-
-- [Electron Packager tutorial](https://www.christianengvall.se/electron-packager-tutorial/)
-- [Browser](https://github.com/hokein/electron-sample-apps/tree/master/webview/browser)
-- [Printing](https://github.com/hokein/electron-sample-apps/tree/master/printing)
+It will create the outfiles into `./out/`
 
 ## References
 
